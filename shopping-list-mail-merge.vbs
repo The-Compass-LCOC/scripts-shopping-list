@@ -40,30 +40,46 @@ Sub ShoppingListMailMerge()
   Set xlBook2 = xlApp.Workbooks.Open(curDir & "\shopping-list-split-column-macro.xlsm", 0, True)
   xlApp.Visible = True
 
-  xlBook.Worksheets("ShoppingList").Range("A:A").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("D:D").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("G:G").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("E:E").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("E:E").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("E:E").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("B:B").EntireColumn.Delete
-  xlBook.Worksheets("ShoppingList").Range("A:A").EntireColumn.Cut
-  xlBook.Worksheets("ShoppingList").Paste xlBook.Worksheets("ShoppingList").Range("Z1")
-  xlBook.Worksheets("ShoppingList").Range("C:C").EntireColumn.Cut
-  xlBook.Worksheets("ShoppingList").Paste xlBook.Worksheets("ShoppingList").Range("A1")
-  xlBook.Worksheets("ShoppingList").Range("Z:Z").EntireColumn.Cut
-  xlBook.Worksheets("ShoppingList").Paste xlBook.Worksheets("ShoppingList").Range("C1")
+  xlBook.Worksheets(1).Range("A:A").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("D:D").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("G:G").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("E:E").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("E:E").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("E:E").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("B:B").EntireColumn.Delete
+  xlBook.Worksheets(1).Range("A:A").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("Z1")
+  xlBook.Worksheets(1).Range("C:C").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("A1")
+  xlBook.Worksheets(1).Range("Z:Z").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("C1")
   xlApp.Run "'shopping-list-split-column-macro.xlsm'!split_name"
   xlApp.Run "'shopping-list-split-column-macro.xlsm'!replace_time"
-  xlBook.Worksheets("ShoppingList").Range("1:1").EntireRow.Delete
+  xlBook.Worksheets(1).Range("1:1").EntireRow.Delete
+  xlBook.Worksheets(1).Range("D:D").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("Z1")
+  xlBook.Worksheets(1).Range("B:B").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("D1")
+  xlBook.Worksheets(1).Range("C:C").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("B1")
+  xlBook.Worksheets(1).Range("Z:Z").EntireColumn.Cut
+  xlBook.Worksheets(1).Paste xlBook.Worksheets(1).Range("C1")
+  xlBook.Worksheets(1).Cells.Interior.ColorIndex = 6
   xlBook2.Close False
 
   Set xlBook2 = xlApp.Workbooks.Open(curDir & "\Arrival Time Detail Report.xlsx", 0, false)
 
-  'xlBook.Worksheets("ShoppingList").UsedRange.Copy
-  MsgBox xlBook.Worksheets("ShoppingList").UsedRange.Rows.Count
-  xlBook2.Worksheets("Arrival Time Detail Report (TOM").Range("B11").EntireRow.Insert
-  'xlBook2.Worksheets("Arrival Time Detail Report (TOM").Range("B11").Insert
+  xlBook.Worksheets(1).UsedRange.Copy
+  xlBook2.Worksheets(1).Range("A" & xlBook2.Worksheets(1).UsedRange.Rows.Count + 1).pasteSpecial
+  xlBook2.Worksheets(1).Range("A" & xlBook2.Worksheets(1).UsedRange.Rows.Count + 1).Value = "Total Shopping"
+  xlBook2.Worksheets(1).Range("E" & xlBook2.Worksheets(1).UsedRange.Rows.Count).Value = xlBook.Worksheets(1).UsedRange.Rows.Count
+  xlBook2.Worksheets(1).Range("A" & xlBook2.Worksheets(1).UsedRange.Rows.Count + 1).Value = "Total Pickup"
+  xlBook2.Worksheets(1).Range("E" & xlBook2.Worksheets(1).UsedRange.Rows.Count).Value = "=" & xlBook2.Worksheets(1).UsedRange.Rows.Count - xlBook.Worksheets(1).UsedRange.Rows.Count -3 & " - COUNTBLANK(B2:B101)"
+  xlBook2.Worksheets(1).Range("A" & xlBook2.Worksheets(1).UsedRange.Rows.Count + 1).Value = "Total"
+  xlBook2.Worksheets(1).Range("E" & xlBook2.Worksheets(1).UsedRange.Rows.Count).Value = "=" & xlBook.Worksheets(1).UsedRange.Rows.Count + xlBook2.Worksheets(1).UsedRange.Rows.Count - xlBook.Worksheets(1).UsedRange.Rows.Count -4 & " - COUNTBLANK(B2:B101)"
+  xlApp.CutCopyMode = False
+  xlBook.Close False
+  xlBook2.Worksheets(1).Cells.Font.Size = 12
 
   Set xlApp = Nothing 
   Set xlBook = Nothing 
