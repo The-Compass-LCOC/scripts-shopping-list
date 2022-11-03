@@ -1,7 +1,3 @@
-Option Explicit
-
-On Error Resume Next
-
 ShoppingListMailMerge
 
 Sub ShoppingListMailMerge() 
@@ -91,10 +87,11 @@ Sub ShoppingListMailMerge()
   xlBook2.Worksheets(1).Range("D1").Value = "Bin"
   xlBook2.Worksheets(1).Range("E1").Value = "Area"
   xlApp.ActiveWorkbook.SaveAs(curDir & "\Warehouse Arrival Sheet  - " & MonthName(Month(Now), True) & " " & Day(Now) & " " & Year(Now) & ".xlsx")
-  Set xlBook = xlApp.Workbooks.Open(curDir & "\Front Desk Arrival Sheet - " & MonthName(Month(Now), True) & " " & Day(Now) & " " & Year(Now) & ".xlsx")
-
   CreateObject("Scripting.FileSystemObject").DeleteFile curDir & "\Arrival Time Detail Report.xlsx"
   CreateObject("Scripting.FileSystemObject").DeleteFile curDir & "\Shopping List.xlsx"
+
+  Set xlBook = xlApp.Workbooks.Open(curDir & "\Front Desk Arrival Sheet - " & MonthName(Month(Now), True) & " " & Day(Now) & " " & Year(Now) & ".xlsx")
+  MsgBox "Complete"
 
   Set xlApp = Nothing 
   Set xlBook = Nothing 
