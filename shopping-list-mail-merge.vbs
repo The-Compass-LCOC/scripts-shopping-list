@@ -17,7 +17,8 @@ Sub ShoppingListMailMerge()
   Set xlBook2 = xlApp.Workbooks.Open(curDir & "\shopping-list-find-and-replace-macro.xlsm", 0, True)
   
   xlApp.Visible = True
-  xlBook.Worksheets(1).Range("A1").Select
+  xlBook.Worksheets(1).Activate
+  xlBook.Worksheets(1).Range("B1").Select
   xlApp.Run "'shopping-list-find-and-replace-macro.xlsm'!find_and_replace"
   xlBook.Save
   xlBook.Close False
@@ -92,7 +93,8 @@ Sub ShoppingListMailMerge()
   CreateObject("Scripting.FileSystemObject").DeleteFile curDir & "\Shopping List.xlsx"
 
   Set xlBook = xlApp.Workbooks.Open(curDir & "\Front Desk Arrival Sheet - " & MonthName(Month(Now), True) & " " & Day(Now) & " " & Year(Now) & ".xlsx")
-  xlBook.Worksheets(1).Range("A1").Select
+  xlBook.Worksheets(1).Activate
+  xlBook.Worksheets(1).Range("B1").Select
   MsgBox "Complete"
 
   Set xlApp = Nothing 
