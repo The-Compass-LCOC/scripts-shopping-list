@@ -92,6 +92,7 @@ Sub ShoppingListMailMerge()
   CreateObject("Scripting.FileSystemObject").DeleteFile curDir & "\Shopping List.xlsx"
 
   Set xlBook = xlApp.Workbooks.Open(curDir & "\Front Desk Arrival Sheet - " & MonthName(Month(Now), True) & " " & Day(Now) & " " & Year(Now) & ".xlsx")
+  xlBook.Worksheets(1).Range("A1").Select
   MsgBox "Complete"
 
   Set xlApp = Nothing 
